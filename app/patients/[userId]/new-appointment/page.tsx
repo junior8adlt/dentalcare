@@ -20,7 +20,7 @@ const Appointment = async ({ params: { userId } }: SearchParamProps) => {
 
           <AppointmentForm patientId={patient?.$id} userId={userId} type='create' />
 
-          <p className='copyright mt-10 py-12'>© 2024 CarePluse</p>
+          <p className='copyright mt-10 py-12'>© 2024 DentalCare</p>
         </div>
       </section>
 
