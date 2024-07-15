@@ -1,12 +1,11 @@
-export const GenderOptions = ['Male', 'Female', 'Other'];
+export const GenderOptions = ['male', 'female', 'other'];
 
 export const PatientFormDefaultValues = {
-  firstName: '',
-  lastName: '',
+  name: '',
   email: '',
   phone: '',
   birthDate: new Date(Date.now()),
-  gender: 'Male' as Gender,
+  gender: 'male' as Gender,
   address: '',
   occupation: '',
   emergencyContactName: '',
@@ -18,7 +17,7 @@ export const PatientFormDefaultValues = {
   currentMedication: '',
   familyMedicalHistory: '',
   pastMedicalHistory: '',
-  identificationType: 'Birth Certificate',
+  identificationType: 'INE',
   identificationNumber: '',
   identificationDocument: [],
   treatmentConsent: false,
@@ -27,17 +26,10 @@ export const PatientFormDefaultValues = {
 };
 
 export const IdentificationTypes = [
-  'Birth Certificate',
-  "Driver's License",
-  'Medical Insurance Card/Policy',
-  'Military ID Card',
-  'National Identity Card',
-  'Passport',
-  'Resident Alien Card (Green Card)',
-  'Social Security Card',
-  'State ID Card',
-  'Student ID Card',
-  'Voter ID Card',
+  'Acta de Nacimiento',
+  'Licencia de Conducir',
+  'Pasaporte',
+  'INE',
 ];
 
 export const Doctors = [
