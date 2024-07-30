@@ -9,7 +9,7 @@ import { z } from 'zod';
 
 import { SelectItem } from '@/components/ui/select';
 import { Doctors } from '@/constants';
-import { createAppointment } from '@/lib/actions/appointment.actions';
+import { createAppointment, updateAppointment } from '@/lib/actions/appointment.actions';
 import { getAppointmentSchema } from '@/lib/validation';
 import { Appointment } from '@/types/appwrites.types';
 
@@ -83,27 +83,26 @@ export const AppointmentForm = ({
           router.push(
             `/patients/${userId}/new-appointment/success?appointmentId=${newAppointment.$id}`,
           );
+        } else {
+          const appointmentToUpdate = {
+            userId,
+            appointmentId: appointment?.$id!,
+            appointment: {
+              primaryPhysician: values.primaryPhysician,
+              schedule: new Date(values.schedule),
+              status: status as Status,
+              cancellationReason: values.cancellationReason,
+            },
+            type,
+          };
+
+          const updatedAppointment = await updateAppointment(appointmentToUpdate);
+
+          if (updatedAppointment) {
+            setOpen && setOpen(false);
+            form.reset();
+          }
         }
-        //   } else {
-        //     const appointmentToUpdate = {
-        //       userId,
-        //       appointmentId: appointment?.$id!,
-        //       appointment: {
-        //         primaryPhysician: values.primaryPhysician,
-        //         schedule: new Date(values.schedule),
-        //         status: status as Status,
-        //         cancellationReason: values.cancellationReason,
-        //       },
-        //       type,
-        //     };
-
-        //     const updatedAppointment = await updateAppointment(appointmentToUpdate);
-
-        //     if (updatedAppointment) {
-        //       setOpen && setOpen(false);
-        //       form.reset();
-        //     }
-        //   }
       }
     } catch (error) {
       console.log(error);
@@ -114,13 +113,13 @@ export const AppointmentForm = ({
   let buttonLabel;
   switch (type) {
     case 'cancel':
-      buttonLabel = 'Cancel Appointment';
+      buttonLabel = 'Cancelar Cita';
       break;
     case 'schedule':
-      buttonLabel = 'Schedule Appointment';
+      buttonLabel = 'Agendar Cita';
       break;
     default:
-      buttonLabel = 'Submit Apppointment';
+      buttonLabel = 'Solicitar Cita';
   }
 
   return (
